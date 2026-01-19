@@ -45,23 +45,7 @@ T00:00:00.000Z&tillDate={end_date}
 T23:59:59.999Z&interval=4&usageType=1&inclBtw=false"
 
 
-
-🗂️ Folder Structure
-energyzero_etl/
-│
-├── dags/ → Airflow DAG file (energyzero_dag.py)
-├── scripts/ → Python scripts
-│ ├── extract_energyzero.py (get data)
-│ ├── transform_pandas.py (transform data)
-| └── generate_plot (create_report)
-├── data/
-│ ├── raw/ → raw JSON files
-│ └── processed/ → Parquet files and energy chart
-├── docker-compose.yml → Docker setup
-├── requirements.txt → Python libraries
-└── README.md → documentation
-
-
+<img width="395" height="296" alt="Screenshot 2026-01-19 202641" src="https://github.com/user-attachments/assets/583bb2c8-677d-4e82-8e12-febb24e768f7" />
 
 
 
