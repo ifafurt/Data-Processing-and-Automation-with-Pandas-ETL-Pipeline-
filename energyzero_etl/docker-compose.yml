@@ -1,0 +1,55 @@
+# docker-compose.yml
+services:
+  postgres:
+    image: postgres:13          #postgres makinesidir.
+    environment:                #Veritabanina giris bilgileri
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  airflow-webserver:          #Airflow arayuz servisi
+    build: .
+    image: energy-etl-app:v1
+    depends_on:               #Postgres servisi sağlıklı (healthy) olmadan beni sakın çalıştırma!" demektir.
+      postgres:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./data:/opt/airflow/data
+    ports:
+      - "8080:8080"
+    user: "${AIRFLOW_UID:-50000}:0"     #Windows ve Linux arasındaki dosya izinlerini düzenler. Dosya yazarken "Permission Denied" hatası almanı engeller.
+    command: >
+      bash -c "airflow db upgrade && 
+      airflow users create --username admin --firstname admin --lastname admin --role Admin --email admin@example.com --password qwer1234 || true &&
+      airflow webserver"
+
+  airflow-scheduler:                    #Bu servisin arayüzü yoktur ama en çok çalışan budur. DAG'ların ne zaman çalışacağına karar veren beyindir.
+    build: .
+    image: energy-etl-app:v1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor                     #Airflow'a görevleri nasıl çalıştıracağını söyler.
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./data:/opt/airflow/data
+    user: "${AIRFLOW_UID:-50000}:0"
+    command: bash -c "airflow scheduler"
+
+# docker-compose up -d
+# docker-compose ps
+# docker-compose stop

@@ -1,0 +1,7 @@
+pandas
+requests
+pyarrow
+fastparquet
+psycopg2-binary
+sqlalchemy
+matplotlib
