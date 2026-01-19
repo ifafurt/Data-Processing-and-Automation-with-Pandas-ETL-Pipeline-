@@ -44,9 +44,10 @@ After finishing this project, you will be able to:
 T00:00:00.000Z&tillDate={end_date}
 T23:59:59.999Z&interval=4&usageType=1&inclBtw=false"
 
-<img width="4200" height="2400" alt="energy_chart_multiline" src="https://github.com/user-attachments/assets/2f7b1740-ceca-4440-b6a2-a7de4adb01ed" />
 
-<img width="1251" height="752" alt="Screenshot 2026-01-19 201725" src="https://github.com/user-attachments/assets/f4a93972-9bb9-45f4-8e63-f3f31103f4ae" />
+<img width="395" height="296" alt="Screenshot 2026-01-19 202641" src="https://github.com/user-attachments/assets/1e62aadc-1b97-4a5e-acea-3f988ea508b9" />
+
+<img width="4200" height="2400" alt="energy_chart_multiline" src="https://github.com/user-attachments/assets/2f7b1740-ceca-4440-b6a2-a7de4adb01ed" />
 
 <img width="952" height="1023" alt="Screenshot 2026-01-19 195836" src="https://github.com/user-attachments/assets/bb0ea1a7-712b-4d64-8c4e-5d1a7bf312b5" />
 
