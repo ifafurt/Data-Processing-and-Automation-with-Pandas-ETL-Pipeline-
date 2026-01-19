@@ -43,3 +43,25 @@ After finishing this project, you will be able to:
 "https://api.energyzero.nl/v1/energyprices?fromDate={start_date}
 T00:00:00.000Z&tillDate={end_date}
 T23:59:59.999Z&interval=4&usageType=1&inclBtw=false"
+
+
+
+🗂️ Folder Structure
+energyzero_etl/
+│
+├── dags/ → Airflow DAG file (energyzero_dag.py)
+├── scripts/ → Python scripts
+│ ├── extract_energyzero.py (get data)
+│ ├── transform_pandas.py (transform data)
+| └── generate_plot (create_report)
+├── data/
+│ ├── raw/ → raw JSON files
+│ └── processed/ → Parquet files and energy chart
+├── docker-compose.yml → Docker setup
+├── requirements.txt → Python libraries
+└── README.md → documentation
+
+
+
+
+
